@@ -1,0 +1,188 @@
+.hero-container{
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 8%;
+  padding-bottom: 90px;
+  /* background-color:linear-gradient(135deg, rgba(24, 19, 114, 0.2), rgba(30, 8, 50, 0.2), rgba(6, 32, 38, 0.2)); */
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(147, 51, 234, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 40%, rgba(79, 70, 229, 0.12) 0%, transparent 60%);
+
+  color: #ffffff;
+  /* min-height: calc(100vh - 0px) */
+  
+}
+.hero-left{
+max-width: 550px;
+margin-left: 100px;
+gap: 5px;
+}
+.status-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #1a1912;
+  border: 1px solid #383215;
+  color: #eab308;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+.dot{
+  width: 7px;
+  height: 7px;
+  background-color: #eab308;
+  border-radius: 50%;
+}
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.highlight-text {
+  color: #f97316; /* Vibrant Orange */
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  color: #9ca3af;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 35px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #f97316, #dc2626);
+  color: white;
+  border: none;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background-color: #18181b;
+  color: #ffffff;
+  border: 1px solid #27272a;
+}
+
+.btn-secondary:hover {
+  background-color: #27272a;
+}
+
+
+.youSwiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.youSwiper .swiper-slide {
+  width: 200px;
+  height: 300px;
+  border: 5px solid rgb(237, 78, 20);
+  border-radius: 20px 0px 20px 0px ;
+}
+
+.youSwiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 0px 20px 0px ;
+
+  
+  /* display: block; */
+}
+
+.touchwithme{
+  /* border: 2px solid blue; */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 300px;
+  /* height: 50px; */
+  /* border-radius: 50%; */
+  position: relative;
+  bottom: 200px;
+  /* left: 100px; */
+  
+
+}
+.whatsapp{
+position: absolute;
+top: 60px;
+left: 30px;
+border-radius: 50%;
+background-color: rgb(8, 70, 9);
+padding: 10px;
+  box-shadow: 2px 1px 9px rgb(218, 167, 3);
+
+}
+.phoneicon{
+  position: absolute;
+  left: 84px;
+  top: 13px;
+  border-radius: 50%;
+background-color: rgb(33, 85, 169);
+padding: 10px;
+box-shadow: 2px 1px 9px rgb(218, 167, 3);
+
+
+}
+
+.instagram{
+position:absolute;
+left:160px;
+top: 10px;
+box-shadow: 2px 1px 9px rgb(218, 167, 3);
+border-radius: 50%;
+background-color: rgb(97, 10, 34);
+padding: 10px;
+
+}
+
+.emailicon{
+  position: absolute;
+  left: 220px;
+  top:64px;
+  box-shadow: 2px 1px 9px rgb(218, 167, 3);
+  border-radius: 50%;
+background-color: rgb(238, 57, 135);
+padding: 10px;
+
+}
+
+
+
+
+/* right-side */

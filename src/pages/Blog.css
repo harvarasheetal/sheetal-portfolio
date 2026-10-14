@@ -1,0 +1,117 @@
+/* Container Layout */
+.blog-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #e2e8f0;
+  background-color:black;
+  border-radius: 16px;
+  border: 1px solid #1e293b;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  line-height: 1.7;
+}
+
+/* Section Common Styling */
+.blog-section {
+  margin-bottom: 2rem;
+}
+
+.blog-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.text-red {
+  color: #f87171;
+}
+
+.text-green {
+  color: #4ade80;
+}
+
+/* Paragraphs & Text */
+.intro-text, .conclusion-text {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+strong {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+/* Lists */
+.blog-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-list li {
+  margin-bottom: 0.75rem;
+  color: #cbd5e1;
+}
+
+.nested-list {
+  list-style-type: circle;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.nested-list li {
+  color: #94a3b8;
+  margin-bottom: 0.35rem;
+}
+
+/* Code Snippet Styles */
+.inline-code {
+  background-color: #1e293b;
+  color: #38bdf8;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+
+.title-code {
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-family: 'Fira Code', monospace;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* Quote Box Styling */
+.quote-box {
+  background-color: #1e293b;
+  border-left: 4px solid #4ade80;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #f1f5f9;
+}
+
+.share{
+   color: white; 
+   text-align: center;
+   font-size: 48px;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-weight: 700;
+   margin-top: 40px;
+   margin-bottom: 40px;
+}
+.learn{
+    color: coral;
+    font-size: 52px;
+}

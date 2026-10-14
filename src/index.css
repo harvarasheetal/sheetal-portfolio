@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+
+
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  overflow-x: hidden;
+  margin: 0;
+    padding-top: 80px; /* Prevents hero content from hiding under fixed navbar */
+}

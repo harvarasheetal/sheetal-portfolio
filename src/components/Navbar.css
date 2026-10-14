@@ -1,0 +1,71 @@
+.main-div {
+    align-items: center;
+    background-color: #111111;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 7%;
+    width: 100%;
+    
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    position: fixed; /* Fixes navbar relative to the viewport */
+    top: 0;          /* Aligns to the top edge */
+    left: 0;         /* Aligns to the left edge */
+    z-index: 1000;   /* Keeps navbar on top of other content */
+    box-sizing: border-box; /* Ensures padding stays within the 100% width */
+}
+
+
+.logo-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    width: 50%;
+    color:rgb(219, 71, 7) ;
+}
+.navbar{
+    width: 50%;
+    font-size: 21px;
+}
+.navbar nav {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar a {
+    color: white;
+    position: relative;
+    text-decoration: none;
+}
+
+.navbar a::after {
+    background-color: rgb(219, 71, 7);
+    bottom: -8px;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 250ms ease;
+    width: 100%;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    transform: scaleX(1);
+}
+
+@media (max-width: 600px) {
+    .main-div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .navbar nav {
+        flex-wrap: wrap;
+        gap: 18px 24px;
+    }
+}
+

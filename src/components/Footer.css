@@ -1,0 +1,94 @@
+/* Footer.css */
+
+.footer {
+  width: 100%;
+  background-color: #0d0d0d;
+  color: #888888;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+/* Pink divider line across top of footer */
+.pink-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #ff2a8d; /* Vibrant Pink Color */
+  box-shadow: 0 0 10px rgba(255, 42, 141, 0.4);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Social Media Button Row */
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.social-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #1a1a1d;
+  border: 1px solid #2a2a2e;
+  color: #aaaaaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.social-button:hover {
+  color: #ffffff;
+  border-color: #ff2a8d;
+  background-color: #25252b;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(255, 42, 141, 0.25);
+}
+
+/* Footer Typography */
+.support-text {
+  font-size: 14px;
+  color: #888888;
+  margin: 0;
+}
+
+.yellow-text {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.copyright-text {
+  font-size: 13px;
+  color: #666666;
+  margin: 0;
+}
+
+.brand-text {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .social-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .social-links {
+    gap: 10px;
+  }
+}
