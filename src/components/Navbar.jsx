@@ -10,7 +10,7 @@ function Navbar() {
     <div>
         <div className="main-div">
             {/* my prfolio logo */}
-      <div className="logo-name"> Sheetal@</div>
+      <div className="logo-name"> Sheetal</div>
       {/* navbar */}
       <div className="navbar">
         <nav>
