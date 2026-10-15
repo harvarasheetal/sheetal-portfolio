@@ -5,7 +5,8 @@ import './Projectsection.css'; // Ensure file name casing matches
 import EasySell from '../images/EasySell.png'
 import discord from '../images/discord.png'
 import smartwatch from '../images/smartwatch.png'
-import portfolioimage from '../images/portfolioimage.png'
+import portfolio from '../images/portfolio.png'
+
 import ice from '../images/ice.png'
 import arjuna from '../images/arjuna.png'
 import codeEditor from '../images/codeEditor.png'
@@ -15,7 +16,7 @@ const projectsData = [
   { id: '01', title: 'EasySell', desc: 'Node,js', platefrom: 'Ecommerce', border: 'orange',image:EasySell },
   { id: '02', title: 'SmartWatch', desc: 'JavaScript', platefrom: 'Technology', border: 'blue',image:smartwatch },
   { id: '03', title: 'Discord', desc: 'JavaScript', platefrom: 'Developer', border: 'yellow', image:discord},
-  { id: '04', title: 'Portfolio Site', desc: 'React', platefrom: 'Framer-Motion', border: 'cyan' ,image:portfolioimage },
+  { id: '04', title: 'Portfolio Site', desc: 'React', platefrom: 'Framer-Motion', border: 'cyan' ,image:portfolio },
   { id: '05', title: 'ICEWebsite', desc: 'Fronted', platefrom: 'UI', border: 'green',image:ice },
   { id: '06', title: 'The Arjuna', desc: 'Javascript', platefrom: 'Game', border: 'red', image:arjuna },
 ];
