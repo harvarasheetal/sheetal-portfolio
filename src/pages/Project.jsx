@@ -1,249 +1,197 @@
-import React, { useState } from 'react';
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Search, Code2, ArrowUpRight } from 'lucide-react'
+import { projects, projectCategories } from '../data/portfolio'
+import { PageHead, Corners, trackSpot, EASE } from '../components/ui'
 
-import { 
-  ExternalLink, 
-  Code2, 
-  Watch, 
-  Image as ImageIcon, 
-  Terminal, 
-  Globe, 
-  MessageSquare,
-  Search,
-  Filter,
-  Sparkles
-} from 'lucide-react';
+function Project() {
+  const [activeCategory, setActiveCategory] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
 
-const projectsData = [
-  {
-    id: 1,
-    title: 'Smart-Watch',
-    description: 'Interactive smart watch display. Click the smart-watch button or YouTube icon to view videos.',
-    techStack: ['JavaScript', 'HTML5', 'CSS3'],
-    liveUrl: 'https://your-watch.netlify.app/',
-    category: 'JavaScript',
-    icon: Watch,
-    color: 'from-blue-500 to-indigo-600',
-    badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-  },
-  {
-    id: 2,
-    title: 'Online Album Maker',
-    description: 'Custom album creation application allowing users to combine photos, audio track, and text.',
-    techStack: ['JavaScript', 'HTML5', 'CSS3'],
-    liveUrl: 'https://s-album-maker.netlify.app/',
-    category: 'JavaScript',
-    icon: ImageIcon,
-    color: 'from-purple-500 to-pink-600',
-    badgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20'
-  },
-  {
-    id: 3,
-    title: 'Online Code Editor',
-    description: 'Browser-based code editor and compiler for executing HTML, CSS, and JavaScript in real-time.',
-    techStack: ['JavaScript', 'HTML5', 'CSS3'],
-    liveUrl: 'https://onlinecomplier.netlify.app/',
-    category: 'JavaScript',
-    icon: Terminal,
-    color: 'from-emerald-500 to-teal-600',
-    badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-  },
-  {
-    id: 4,
-    title: 'ICE Website',
-    description: 'Comprehensive static web page build featuring full page elements, services layout, and responsive design.',
-    techStack: ['HTML', 'CSS'],
-    liveUrl: 'https://iceclone.netlify.app/',
-    category: 'HTML & CSS',
-    icon: Globe,
-    color: 'from-cyan-500 to-blue-600',
-    badgeColor: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
-  },
-  {
-    id: 5,
-    title: 'Discord Website',
-    description: 'An attractive UI clone of the Discord homepage built with Tailwind CSS.',
-    techStack: ['HTML', 'Tailwind CSS'],
-    liveUrl: 'https://sheetal-discord.netlify.app/',
-    category: 'Tailwind CSS',
-    icon: MessageSquare,
-    color: 'from-indigo-500 to-purple-600',
-    badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
-  }
-];
- function Project() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const categories = ['All', 'JavaScript', 'HTML & CSS', 'Tailwind CSS'];
-
-  const filteredProjects = projectsData.filter((project) => {
-    const matchesCategory = activeCategory === 'All' || project.category === activeCategory;
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          project.techStack.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filtered = projects.filter((p) => {
+    const matchesCategory = activeCategory === 'All' || p.category === activeCategory
+    const query = searchQuery.toLowerCase().trim()
+    const matchesSearch =
+      !query ||
+      p.title.toLowerCase().includes(query) ||
+      p.desc.toLowerCase().includes(query) ||
+      p.tech.some((t) => t.toLowerCase().includes(query))
+    return matchesCategory && matchesSearch
+  })
 
   return (
-    <div className="min-h-screen bg- text-slate-100 font-sans selection:bg-indigo selection:text-white">
-      {/* Background Accent Gradients */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl"></div>
-      </div>
+    <div className="rails page-top">
+      <PageHead
+        label="Production Index"
+        title="Deployed Works &"
+        accent="Software Builds"
+        lead="A catalog of full-stack platforms, interactive client utilities, and responsive design systems."
+        meta={[
+          ['Total Projects', `${projects.length} Shipped`],
+          ['Filter Status', `${filtered.length} Matching`],
+          ['License', 'Open Source / Client'],
+          ['Hosting', 'Netlify / Vercel'],
+        ]}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
-        {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span>Featured Work</span>
+      <section className="section">
+        <div className="shell" style={{ position: 'relative' }}>
+          <Corners />
+
+          {/* Filter & Search Bar - Sharp Hairline Design */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: 16,
+              flexWrap: 'wrap',
+              marginBottom: 'clamp(32px, 5vw, 48px)',
+              paddingBottom: 24,
+              borderBottom: '1px solid var(--line)',
+            }}
+          >
+            {/* Category Tabs */}
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {projectCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`chip ${activeCategory === cat ? 'chip--green' : ''}`}
+                  style={{
+                    cursor: 'pointer',
+                    borderColor: activeCategory === cat ? 'var(--green)' : 'var(--line)',
+                    background: activeCategory === cat ? 'var(--green-soft)' : 'transparent',
+                    color: activeCategory === cat ? 'var(--green)' : 'var(--text-2)',
+                    fontSize: 12,
+                    padding: '0 12px',
+                    height: 32,
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Search Input Box */}
+            <div style={{ position: 'relative', minWidth: 200, maxWidth: 320, width: '100%', flexGrow: 1 }}>
+              <Search
+                size={14}
+                style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }}
+              />
+              <input
+                type="text"
+                placeholder="Search projects or tech..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '9px 14px 9px 36px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 12.5,
+                  background: 'var(--panel)',
+                  border: '1px solid var(--line-2)',
+                  color: 'var(--text)',
+                  outline: 'none',
+                  transition: 'border-color 0.25s',
+                }}
+                onFocus={(e) => (e.target.style.borderColor = 'var(--green)')}
+                onBlur={(e) => (e.target.style.borderColor = 'var(--line-2)')}
+              />
+            </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-            My Projects Portfolio
-          </h1>
-          <p className="text-slate-400 text-lg">
-            A collection of web development projects showcasing responsive UI designs, interactive JavaScript applications, and clones.
-          </p>
-        </div>
 
-        {/* Filter and Search Bar */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-12">
-          
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
-                  activeCategory === category
-                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/30'
-                    : 'bg-slate-900/80 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'
-                }`}
+          {/* Projects Grid */}
+          <div className="cells cells--auto">
+            {filtered.map((p, idx) => (
+              <motion.div
+                key={p.id}
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35, ease: EASE }}
+                className="spot"
+                onPointerMove={trackSpot}
+                style={{ display: 'flex', flexDirection: 'column', cursor: 'default' }}
               >
-                {category}
-              </button>
-            ))}
-          </div>
+                {/* Project Image */}
+                {p.image && (
+                  <div style={{ overflow: 'hidden', borderBottom: '1px solid var(--line)', aspectRatio: '16/10', background: '#020302' }}>
+                    <motion.img
+                      src={p.image}
+                      alt={p.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.5, ease: EASE }}
+                    />
+                  </div>
+                )}
 
-          {/* Search Box */}
-          <div className="relative w-full md:w-72">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search projects or tech..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-900/80 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
-            />
-          </div>
-
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => {
-            const IconComponent = project.icon;
-            return (
-              <div
-                key={project.id}
-                className="group relative bg-black  /60 rounded-2xl border border-slate-800/80 hover:border-slate-700 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/5 flex flex-col justify-between overflow-hidden"
-              >
-                {/* Top Glow on Hover */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-
-                <div>
-                  {/* Icon & Category Badge */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${project.color} text-white shadow-md`}>
-                      <IconComponent className="w-6 h-6" />
-                    </div>
-                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${project.badgeColor}`}>
-                      {project.category}
-                    </span>
+                {/* Details */}
+                <div style={{ padding: 'clamp(20px, 3vw, 28px)', display: 'grid', gap: 12, flex: 1 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3 style={{ fontSize: 19, fontWeight: 600 }}>{p.title}</h3>
+                    <span className="chip chip--green">{p.category}</span>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
-                    {project.title}
-                  </h3>
+                  <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>{p.desc}</p>
 
-                  {/* Description */}
-                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div>
-                  {/* Tech Stack Pills */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-300 border border-slate-700/50"
-                      >
-                        {tech}
-                      </span>
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
+                    {p.tech.map((t) => (
+                      <span key={t} className="chip">{t}</span>
                     ))}
                   </div>
 
-                  {/* Live Link Button */}
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white font-medium text-sm transition-all duration-200 border border-slate-700/60 hover:border-indigo-500 group/btn"
-                  >
-                    <span>View Live Demo</span>
-                    <ExternalLink className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </a>
+                  <div style={{ marginTop: 12, paddingTop: 14, borderTop: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {p.url ? (
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-arrow"
+                        style={{ color: 'var(--green)' }}
+                      >
+                        Launch Demo <ArrowUpRight size={14} />
+                      </a>
+                    ) : (
+                      <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                        LOCAL / REPO ARCHIVE
+                      </span>
+                    )}
+
+                    <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                      REF_0{idx + 1}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Empty Search State */}
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-16 bg-slate-900/30 rounded-2xl border border-slate-800">
-            <Code2 className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-slate-300 mb-1">No projects found</h3>
-            <p className="text-slate-500 text-sm">Try adjusting your search query or filter criteria.</p>
+              </motion.div>
+            ))}
           </div>
-        )}
 
-      </div>
+          {/* Empty Search State */}
+          {filtered.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '64px 20px', border: '1px solid var(--line)', background: 'var(--panel)' }}>
+              <Code2 size={36} style={{ color: 'var(--text-3)', margin: '0 auto 16px' }} />
+              <h3 style={{ fontSize: 18, marginBottom: 6 }}>No matching projects located</h3>
+              <p style={{ fontSize: 14, color: 'var(--text-2)', marginBottom: 20 }}>
+                Try adjusting your search criteria or resetting filters.
+              </p>
+              <button
+                onClick={() => {
+                  setActiveCategory('All')
+                  setSearchQuery('')
+                }}
+                className="btn btn--ghost btn--sm"
+              >
+                Reset All Filters
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
-  );
+  )
 }
 
-export default Project;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Project

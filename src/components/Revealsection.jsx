@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import {motion,scale,useInView} from 'framer-motion'
+import {motion,useInView} from 'framer-motion'
 import './Revealsection.css'
 
 function Revealsection() {

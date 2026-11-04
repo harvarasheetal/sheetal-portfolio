@@ -1,94 +1,203 @@
-/* Footer.css */
+/* ==================================================================
+   Footer — Signal Design System
+   Blueprint hairline borders, telemetry readouts, sharp 0px styling
+   ================================================================== */
 
-.footer {
-  width: 100%;
-  background-color: #0d0d0d;
-  color: #888888;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
+.footer-wrapper {
+  margin-top: clamp(64px, 10vw, 120px);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
   position: relative;
+  z-index: 10;
 }
 
-/* Pink divider line across top of footer */
-.pink-divider {
-  width: 100%;
-  height: 2px;
-  background-color: #ff2a8d; /* Vibrant Pink Color */
-  box-shadow: 0 0 10px rgba(255, 42, 141, 0.4);
+.footer-inner {
+  padding-top: clamp(48px, 7vw, 80px);
+  padding-bottom: clamp(32px, 4vw, 48px);
 }
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px 30px 20px;
+/* ── 4-Column Blueprint Grid ─────────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  padding-bottom: clamp(44px, 6vw, 64px);
+  border-bottom: 1px solid var(--line);
+}
+
+.footer-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
 }
 
-/* Social Media Button Row */
-.social-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+.footer-col--brand {
+  gap: 18px;
 }
 
-.social-button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: #1a1a1d;
-  border: 1px solid #2a2a2e;
-  color: #aaaaaa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.social-button:hover {
-  color: #ffffff;
-  border-color: #ff2a8d;
-  background-color: #25252b;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(255, 42, 141, 0.25);
-}
-
-/* Footer Typography */
-.support-text {
+.footer-tagline {
   font-size: 14px;
-  color: #888888;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 320px;
   margin: 0;
 }
 
-.yellow-text {
-  color: #ffd700;
-  font-weight: 600;
+.footer-telemetry-box {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  max-width: 300px;
 }
 
-.copyright-text {
-  font-size: 13px;
-  color: #666666;
+.footer-telemetry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footer-heading {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+/* ── Links List ──────────────────────────────────────────────────── */
+.footer-links-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.brand-text {
-  color: #ffd700;
-  font-weight: 600;
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: fit-content;
 }
 
-@media (max-width: 480px) {
-  .social-button {
-    width: 38px;
-    height: 38px;
+.footer-link__idx {
+  font-size: 11px;
+  color: var(--text-3);
+  min-width: 18px;
+}
+
+.footer-link__arrow {
+  color: var(--text-3);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--green);
+  transform: translateX(3px);
+}
+
+.footer-link:hover .footer-link__arrow {
+  color: var(--green);
+  transform: translate(2px, -2px);
+}
+
+.footer-link:hover .footer-link__idx {
+  color: var(--green);
+}
+
+/* ── Manifest Box ────────────────────────────────────────────────── */
+.footer-manifest {
+  display: grid;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.footer-manifest-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.footer-manifest-item .mono {
+  font-size: 10.5px;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+}
+
+.footer-manifest-item span:last-child {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── Bottom Bar ──────────────────────────────────────────────────── */
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 28px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-left {
+  font-size: 11.5px;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+}
+
+.footer-bottom-center {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+}
+
+.footer-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-back-to-top:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive Rules ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
+}
 
-  .social-links {
-    gap: 10px;
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

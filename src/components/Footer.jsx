@@ -1,101 +1,189 @@
-import React from 'react';
-import './Footer.css';
+import { Link } from 'react-router-dom'
+import { ArrowUpRight, ArrowUp, MessageSquareCode, Mail, Phone } from 'lucide-react'
+import { FaInstagram, FaGithub } from 'react-icons/fa'
+import { profile, navLinks } from '../data/portfolio'
+import { Marquee, useClock } from './ui'
+import { Logo } from './Navbar'
+import { scrollToTop } from '../lib/scroll'
+import './Footer.css'
 
-const Footer = () => {
-  // Replace these URLs with your actual profile links
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/your-username',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/in/your-username',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Instagram',
-      url: 'https://instagram.com/your-username',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-      ),
-    },
-    {
-      name: 'X (Twitter)',
-      url: 'https://x.com/your-username',
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Website',
-      url: 'https://yourwebsite.com',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-        </svg>
-      ),
-    },
-    {
-      name: 'Email',
-      url: 'mailto:yourname@example.com',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-      ),
-    },
-  ];
+function Footer() {
+  const time = useClock(profile.timezone)
+
+  const tickerItems = [
+    'Available for freelance & full-time engineering',
+    'React 19 · Node.js · MongoDB · Tailwind CSS',
+    'Speedcubing Algorithm Mindset: 3.5s PB',
+    `Based in ${profile.city}, Gujarat, India`,
+    `Coordinates: ${profile.coordinates}`,
+    'Zero layout shift · 60fps springs · Zero fluff',
+  ]
 
   return (
-    <footer className="footer">
-      {/* Pink line divider across top of footer */}
-      <div className="pink-divider"></div>
+    <footer className="footer-wrapper">
+      {/* Top Infinite Telemetry Ticker */}
+      <Marquee items={tickerItems} duration={38} />
 
-      <div className="footer-container">
-        {/* Social Media Links */}
-        <div className="social-links">
-          {socialLinks.map((media, index) => (
-            <a
-              key={index}
-              href={media.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-button"
-              aria-label={media.name}
-            >
-              {media.icon}
-            </a>
-          ))}
+      <div className="footer-inner shell">
+        {/* Main 4-Column Grid */}
+        <div className="footer-grid">
+          {/* Col 1: Brand & Status Telemetry */}
+          <div className="footer-col footer-col--brand">
+            <Logo />
+            <p className="footer-tagline">
+              {profile.tagline}
+            </p>
+
+            <div className="footer-telemetry-box">
+              <div className="footer-telemetry-row">
+                <span className="pulse-dot" />
+                <span className="mono" style={{ fontSize: 11, color: 'var(--green)' }}>
+                  SYSTEM OPERATIONAL
+                </span>
+              </div>
+              <div className="footer-telemetry-row">
+                <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                  LOCAL TIME:
+                </span>
+                <span className="mono" style={{ fontSize: 11, color: 'var(--text)' }}>
+                  {time} IST
+                </span>
+              </div>
+              <div className="footer-telemetry-row">
+                <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                  STATION:
+                </span>
+                <span className="mono" style={{ fontSize: 11, color: 'var(--text)' }}>
+                  {profile.city.toUpperCase()}, IN
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Col 2: Navigation Sitemap */}
+          <div className="footer-col">
+            <span className="footer-heading mono">01 SITEMAP</span>
+            <ul className="footer-links-list">
+              {navLinks.map((link, idx) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="footer-link">
+                    <span className="mono footer-link__idx">0{idx + 1}</span>
+                    <span>{link.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3: Direct Connect Channels */}
+          <div className="footer-col">
+            <span className="footer-heading mono">02 CONNECT</span>
+            <ul className="footer-links-list">
+              <li>
+                <a
+                  href={profile.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  <MessageSquareCode size={14} style={{ color: 'var(--green)' }} />
+                  <span>WhatsApp Chat</span>
+                  <ArrowUpRight size={13} className="footer-link__arrow" />
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${profile.email}`} className="footer-link">
+                  <Mail size={14} style={{ color: 'var(--green)' }} />
+                  <span>Direct Email</span>
+                  <ArrowUpRight size={13} className="footer-link__arrow" />
+                </a>
+              </li>
+              <li>
+                <a href={profile.phoneHref} className="footer-link">
+                  <Phone size={14} style={{ color: 'var(--green)' }} />
+                  <span>Telephone</span>
+                  <ArrowUpRight size={13} className="footer-link__arrow" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={profile.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  <FaInstagram size={14} style={{ color: 'var(--green)' }} />
+                  <span>Instagram</span>
+                  <ArrowUpRight size={13} className="footer-link__arrow" />
+                </a>
+              </li>
+              {profile.github && (
+                <li>
+                  <a
+                    href={profile.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link"
+                  >
+                    <FaGithub size={14} style={{ color: 'var(--green)' }} />
+                    <span>GitHub</span>
+                    <ArrowUpRight size={13} className="footer-link__arrow" />
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+
+          {/* Col 4: Engine Manifest */}
+          <div className="footer-col">
+            <span className="footer-heading mono">03 SYSTEM SPECS</span>
+            <div className="footer-manifest">
+              <div className="footer-manifest-item">
+                <span className="mono">CORE:</span>
+                <span>React 19 + Vite</span>
+              </div>
+              <div className="footer-manifest-item">
+                <span className="mono">STYLING:</span>
+                <span>Tailwind CSS + Sharp Edges</span>
+              </div>
+              <div className="footer-manifest-item">
+                <span className="mono">MOTION:</span>
+                <span>Framer Motion 13</span>
+              </div>
+              <div className="footer-manifest-item">
+                <span className="mono">SCROLL:</span>
+                <span>Lenis Smooth Scroll</span>
+              </div>
+              <div className="footer-manifest-item">
+                <span className="mono">DEPLOY:</span>
+                <span>Vercel Edge Network</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Footer Text */}
-        <p className="support-text">
-          <span className="yellow-text">Support</span> the developer.
-        </p>
-        <p className="copyright-text">
-          © {new Date().getFullYear()} All Rights Reserved | <span className="brand-text">Web Devs</span>
-        </p>
+        {/* Bottom Bar */}
+        <div className="footer-bottom-bar">
+          <div className="footer-bottom-left mono">
+            © {new Date().getFullYear()} {profile.name.toUpperCase()} · ALL SYSTEMS NOMINAL
+          </div>
+
+          <div className="footer-bottom-center mono">
+            {profile.coordinates}
+          </div>
+
+          <button
+            onClick={() => scrollToTop()}
+            className="footer-back-to-top"
+            aria-label="Scroll back to top of page"
+          >
+            <span>TOP</span>
+            <ArrowUp size={14} />
+          </button>
+        </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

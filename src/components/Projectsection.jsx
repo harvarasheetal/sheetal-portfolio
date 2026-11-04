@@ -9,8 +9,6 @@ import portfolio from '../images/portfolio.png'
 
 import ice from '../images/ice.png'
 import arjuna from '../images/arjuna.png'
-import codeEditor from '../images/codeEditor.png'
-import { image } from 'framer-motion/client';
 
 const projectsData = [
   { id: '01', title: 'EasySell', desc: 'Node,js', platefrom: 'Ecommerce', border: 'orange',image:EasySell },
@@ -60,7 +58,7 @@ function Projectsection() {
                 <ProjectCard
                   key={project.id}
                   project={project}
-                  totalCount={totalProjects}
+                  _totalCount={totalProjects}
                   staggerDelay={index * 0.1}
                   // image={image}
                 />
@@ -93,15 +91,14 @@ function Projectsection() {
   );
 }
 
-const ProjectCard = ({ project, totalCount, staggerDelay }) => {
+const ProjectCard = ({ project, _totalCount, staggerDelay }) => {
   const { ref, inView } = useInView({
     threshold: 0.3,
     triggerOnce: false,
   });
 
   // Format total count to always be 2 digits (e.g., 06)
-  const formattedTotal = String(totalCount).padStart(2, '0');
-
+  
   return (
     <motion.div
       ref={ref}

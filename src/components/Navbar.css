@@ -1,71 +1,350 @@
-.main-div {
-    align-items: center;
-    background-color: #111111;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 18px 7%;
-    width: 100%;
-    
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ==================================================================
+   Navbar — Signal Design System
+   Sharp 0px edges, hairline borders, pitch-black backdrop blur, signal-green
+   ================================================================== */
 
-    position: fixed; /* Fixes navbar relative to the viewport */
-    top: 0;          /* Aligns to the top edge */
-    left: 0;         /* Aligns to the left edge */
-    z-index: 1000;   /* Keeps navbar on top of other content */
-    box-sizing: border-box; /* Ensures padding stays within the 100% width */
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-
-.logo-name {
-    font-size: 2.2rem;
-    font-weight: 700;
-    width: 50%;
-    color:rgb(219, 71, 7) ;
-}
-.navbar{
-    width: 50%;
-    font-size: 21px;
-}
-.navbar nav {
-    display: flex;
-    gap: 30px;
+.nav-wrapper--scrolled {
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom-color: rgba(46, 255, 140, 0.22);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 1px 0 0 rgba(46, 255, 140, 0.1);
 }
 
-.navbar a {
-    color: white;
-    position: relative;
-    text-decoration: none;
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 100%;
+  gap: 20px;
 }
 
-.navbar a::after {
-    background-color: rgb(219, 71, 7);
-    bottom: -8px;
-    content: '';
-    height: 2px;
-    left: 0;
-    position: absolute;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 250ms ease;
-    width: 100%;
+/* ── Brand Logo ──────────────────────────────────────────────────── */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.navbar a:hover::after,
-.navbar a.active::after {
-    transform: scaleX(1);
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav__logo-matrix {
+  display: grid;
+  grid-template-columns: repeat(3, 5px);
+  gap: 3px;
+}
+
+.nav__logo-matrix span {
+  width: 5px;
+  height: 5px;
+  background: var(--green);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.nav__logo:hover .nav__logo-matrix span:nth-child(even) {
+  background: #ffffff;
+  transform: scale(1.15);
+}
+
+.nav__logo-text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__logo-handle {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.nav__logo-caret {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  margin-left: 2px;
+  background: var(--green);
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.nav-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(46, 255, 140, 0.06);
+  border: 1px solid var(--line-green);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+
+.nav-status-text {
+  font-weight: 600;
+}
+
+/* ── Desktop Nav Menu ────────────────────────────────────────────── */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  padding: 0 8px;
+  transition: border-color 0.3s ease;
+}
+
+.nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 450;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover,
+.nav-item--active {
+  color: #ffffff;
+}
+
+.nav-item__index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-3);
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover .nav-item__index,
+.nav-item--active .nav-item__index {
+  color: var(--green);
+}
+
+.nav-item__label {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-item__hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 0;
+}
+
+.nav-item__line {
+  position: absolute;
+  bottom: -1px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  z-index: 2;
+}
+
+/* ── Right Actions ───────────────────────────────────────────────── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.nav-clock__icon {
+  color: var(--green);
+}
+
+.nav-cta {
+  display: inline-flex;
+}
+
+.nav-burger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-burger-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* ── Scroll Progress Line ────────────────────────────────────────── */
+.nav-scroll-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green-3), var(--green), #9dffc9);
+  transform-origin: left;
+  box-shadow: 0 0 10px rgba(46, 255, 140, 0.5);
+}
+
+/* ── Mobile Navigation Drawer ────────────────────────────────────── */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(28px);
+  padding: clamp(20px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  max-height: 100dvh;
+}
+
+.mobile-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mobile-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: auto 0;
+}
+
+.mobile-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-size: clamp(24px, 6vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-nav__index {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-right: 16px;
+}
+
+.mobile-nav__title {
+  flex: 1;
+}
+
+.mobile-nav__arrow {
+  color: var(--text-3);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav__link:hover,
+.mobile-nav__link--active {
+  color: var(--green);
+  padding-left: 8px;
+}
+
+.mobile-nav__link:hover .mobile-nav__arrow,
+.mobile-nav__link--active .mobile-nav__arrow {
+  color: var(--green);
+  transform: translate(3px, -3px);
+}
+
+.mobile-nav__footer {
+  display: grid;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.mobile-nav__telemetry {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+}
+
+.mobile-nav__buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.mobile-nav__buttons .btn {
+  flex: 1;
+}
+
+/* ── Responsive Rules ────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .nav-menu { display: none; }
+  .nav-clock { display: none; }
+  .nav-burger-btn { display: flex; }
 }
 
 @media (max-width: 600px) {
-    .main-div {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .navbar nav {
-        flex-wrap: wrap;
-        gap: 18px 24px;
-    }
+  .nav-status-badge { display: none; }
+  .nav-cta { display: none; }
 }
-
