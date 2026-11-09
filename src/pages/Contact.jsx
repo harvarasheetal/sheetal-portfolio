@@ -15,6 +15,8 @@ import { PageHead, Corners, trackSpot, useClock } from '../components/ui'
 function Contact() {
   const time = useClock(profile.timezone)
 
+  const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '8854c3b0-b67f-4e19-b873-9dc9f0e3c083'
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,26 +35,35 @@ function Contact() {
     setStatus({ loading: true, success: false, error: null })
 
     try {
-      const response = await fetch('http://localhost:5000/mail/send-mail', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || `Portfolio Transmission from ${formData.name.trim()}`,
+          message: formData.message.trim(),
+          from_name: 'Sheetal Harvara Portfolio',
+          botcheck: '',
+        }),
       })
 
       const data = await response.json().catch(() => ({}))
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to dispatch message. Please retry.')
+      if (response.ok && data.success) {
+        setStatus({ loading: false, success: true, error: null })
+        setFormData({ name: '', email: '', subject: '', message: '' })
+
+        setTimeout(() => {
+          setStatus((prev) => ({ ...prev, success: false }))
+        }, 7000)
+      } else {
+        throw new Error(data.message || 'Failed to dispatch transmission. Please retry or contact directly via WhatsApp.')
       }
-
-      setStatus({ loading: false, success: true, error: null })
-      setFormData({ name: '', email: '', subject: '', message: '' })
-
-      setTimeout(() => {
-        setStatus((prev) => ({ ...prev, success: false }))
-      }, 6000)
     } catch (err) {
       setStatus({
         loading: false,
@@ -222,6 +233,9 @@ function Contact() {
               </h3>
 
               <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 18 }}>
+                {/* Honeypot spam protection for Web3Forms */}
+                <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                 <div className="form-row">
                   <div className="field">
                     <label htmlFor="c-name">Full Name</label>
@@ -283,7 +297,7 @@ function Contact() {
                     }}
                   >
                     <CheckCircle2 size={18} />
-                    <span>Transmission successful. I will respond within 24 hours.</span>
+                    <span>Transmission received! Delivered directly to Sheetal. I will respond within 24 hours.</span>
                   </div>
                 )}
 
@@ -307,7 +321,7 @@ function Contact() {
                   className="btn btn--primary"
                   style={{ width: '100%', marginTop: 8 }}
                 >
-                  {status.loading ? 'Transmitting Message...' : 'Dispatch Message'}
+                  {status.loading ? 'Transmitting via Web3Forms...' : 'Dispatch Message'}
                   <Send size={15} style={{ marginLeft: 6 }} />
                 </button>
               </form>

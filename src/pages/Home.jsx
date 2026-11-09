@@ -439,6 +439,7 @@ function FeaturedProjects() {
 
 /* ── Section 04: Interactive Contact ──────────────────────── */
 function ContactSectionHome() {
+  const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '8854c3b0-b67f-4e19-b873-9dc9f0e3c083'
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState({ loading: false, success: false, error: null })
 
@@ -446,16 +447,30 @@ function ContactSectionHome() {
     e.preventDefault()
     setStatus({ loading: true, success: false, error: null })
     try {
-      const res = await fetch('http://localhost:5000/mail/send-mail', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || `Portfolio Transmission from ${formData.name.trim()}`,
+          message: formData.message.trim(),
+          from_name: 'Sheetal Harvara Portfolio',
+          botcheck: '',
+        }),
       })
       const data = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(data.message || 'Transmission failed. Please try again.')
-      setStatus({ loading: false, success: true, error: null })
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setTimeout(() => setStatus((p) => ({ ...p, success: false })), 6000)
+      if (res.ok && data.success) {
+        setStatus({ loading: false, success: true, error: null })
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setStatus((p) => ({ ...p, success: false })), 7000)
+      } else {
+        throw new Error(data.message || 'Transmission failed. Please try again or reach out on WhatsApp.')
+      }
     } catch (err) {
       setStatus({ loading: false, success: false, error: err.message || 'Error dispatching message.' })
     }
@@ -556,6 +571,9 @@ function ContactSectionHome() {
             <h3 style={{ fontSize: 22, marginBottom: 24 }}>Send A Transmission</h3>
 
             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 18 }}>
+              {/* Honeypot anti-spam for Web3Forms */}
+              <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
               <div className="form-row">
                 <div className="field">
                   <label htmlFor="name">Your Name</label>

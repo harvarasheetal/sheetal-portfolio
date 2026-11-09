@@ -41,17 +41,17 @@ const ContactSection = () => {
 
     try {
       // Replace URL with your backend API endpoint (e.g., 'http://localhost:5000/api/contact')
-      const response = await fetch('http://localhost:5000/mail/send-mail', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ access_key: "8854c3b0-b67f-4e19-b873-9dc9f0e3c083", ...formData, from_name: "Sheetal Harvara Portfolio", botcheck: "" }),
       });
 
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
+      if (!response.ok || !data.success) {
         throw new Error(data.message || 'Failed to send message. Please try again.');
       }
 
